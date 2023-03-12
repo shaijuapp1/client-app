@@ -10,10 +10,13 @@ interface Props {
     multiple?:boolean;
 }
 
-export default function MyDropdownInput(props: Props) {
+export default function UserSelect(props: Props) {
     const [field, meta, helpers] = useField(props.name);
 
-   
+    useEffect(() => {
+
+    })
+    
     const renderLabel = (option: any) => ({
         text: option.title,
         value: option.id,    
@@ -31,7 +34,7 @@ export default function MyDropdownInput(props: Props) {
                 fluid
                 search
                 selection
-                multiple={props.multiple}  
+                multiple={props.multiple}   
             />
 
   

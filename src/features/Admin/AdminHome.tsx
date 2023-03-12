@@ -55,6 +55,18 @@ export default observer(function AdminHome() {
                 </Card.Content>
             </Card>
 
+            <Card>
+                <Card.Content>                    
+                    <Card.Header>Data Security</Card.Header>                                      
+                </Card.Content>
+                <Card.Content extra>
+                    <div className='ui two buttons'>                    
+                    <Button as={NavLink} to='/DataSecurityList' basic color='green' content='List' />
+                    <Button as={NavLink} to='/CreateDataSecurity' basic color='green' content='Add New' />                                                       
+                    </div>
+                </Card.Content>
+            </Card>
+
         </Card.Group>
     )
 })

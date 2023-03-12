@@ -6,4 +6,5 @@ export interface DataSecurity {
 	filedId: string
 	userId: string
 	access: string
+	itemList: string[];
 }

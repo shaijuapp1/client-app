@@ -69,12 +69,12 @@ export default observer(function AppConfigDetails() {
 
             createItem(newAppConfig).then( (newID) => {
                 action.setSubmitting(false)
-                navigate(`/AppConfigDetails/${newID}`)
+                navigate(`/AppConfigList`)
             } )
         } else {            
             updateItem(AppConfig).then(() => {
                 action.setSubmitting(false)
-                navigate(`/AppConfigDetails/${AppConfig.id}`)
+                navigate(`/AppConfigList`)
             })
 
         }

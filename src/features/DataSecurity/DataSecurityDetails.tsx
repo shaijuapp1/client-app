@@ -8,10 +8,13 @@ import { useStore } from "../../app/stores/store";
 import { DataSecurity } from "../../app/models/DataSecurity";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import MyTextInput from "../../app/common/form/MyTextInput";
+import MyDropdownInput from "../../app/common/form/MyDropdownInput";
+import { DataSecurityAccessType } from "../../app/common/options/DataSecurityAccessType";
+import { DataSecurityAccess } from "../../app/common/options/DataSecurityAccess";
 
 
 export default observer(function DataSecurityDetails() {
-    const { DataSecurityStore } = useStore();
+    const { DataSecurityStore, AppConfigTypeStore } = useStore();
     const { loadItem, item, loading, updateItem, createItem, deleteItem } = DataSecurityStore;
     const { id } = useParams();
     const navigate = useNavigate();
@@ -24,14 +27,18 @@ export default observer(function DataSecurityDetails() {
         filedId:'',
         userId:'',
         access:'',
+        itemList: []
     });
     
     const validationSchema = Yup.object({
-        title: Yup.string().required('The event title is required'),       
+        tableId: Yup.string().required('The event title is required'),       
     });
 
     useEffect(() => {
-             
+        if(!AppConfigTypeStore.itemList.length){
+            AppConfigTypeStore.loadItems()
+        }
+
         if (id){
             loadItem(id).then(it =>{ 
                 debugger;
@@ -50,12 +57,12 @@ export default observer(function DataSecurityDetails() {
 
             createItem(newDataSecurity).then( (newID) => {
                 action.setSubmitting(false)
-                navigate(`/DataSecurityDetails/${newID}`)
+                navigate(`/DataSecurityList`)
             } )
         } else {            
             updateItem(DataSecurity).then(() => {
                 action.setSubmitting(false)
-                navigate(`/DataSecurityDetails/${DataSecurity.id}`)
+                navigate(`/DataSecurityList`)
             })
 
         }
@@ -65,7 +72,7 @@ export default observer(function DataSecurityDetails() {
         if (id) deleteItem(id).then(() => navigate('/DataSecurityList/'))
     }
 
-    if (DataSecurityStore.loadingInitial) return <LoadingComponent content='Loading DataSecurity details' />
+    if (AppConfigTypeStore.itemList.length > 0 && DataSecurityStore.loadingInitial) return <LoadingComponent content='Loading DataSecurity details' />
 
     return (
         <Segment clearing>
@@ -77,7 +84,39 @@ export default observer(function DataSecurityDetails() {
                 onSubmit={(values, action) => handleFormSubmit(values, action)}>
                 {({ handleSubmit, isValid, isSubmitting, dirty }) => (
                     <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
-                        {/* <MyDropdownInput  label="Table" options={                            
+                        
+                         <MyDropdownInput  label="Table Name" options={                            
+                            AppConfigTypeStore.itemList?.map( ds => {
+                                    return {
+                                        key: ds.id,
+                                        text: ds.title,
+                                        value: ds.id
+                                    }
+                                })
+                            }                             
+                            name='tableId' placeholder='Table Name' />
+
+                        <MyDropdownInput  label="Access Type" options={DataSecurityAccessType}                             
+                            name='filedType' placeholder='Access Type' />
+
+                        <MyDropdownInput  label="Access" options={DataSecurityAccess}                             
+                            name='itemList' placeholder='Access'  multiple={true}/>
+
+{/*
+                        <MyDropdownInput  label="Status Config Name" options={                            
+                            AppConfigTypeStore.itemList?.map( ds => {
+                                    return {
+                                        key: ds.id,
+                                        text: ds.title,
+                                        value: ds.id
+                                    }
+                                })
+                            }                             
+                            name='statusId' placeholder='Status Config Name' />
+
+
+
+                         <MyDropdownInput  label="Table" options={                            
                             TableNameStore.itemList?.map( ds => {
                                     return {
                                         key: ds.id,
@@ -97,9 +136,12 @@ export default observer(function DataSecurityDetails() {
                                     }
                                 })
                             }                             
-                            name='statusId' placeholder='Status' /> */}
+                            name='statusId' placeholder='Status' />
+                            <MyTextInput name='title' placeholder='Title' />
 
-                        <MyTextInput name='title' placeholder='Title' />
+                            */}
+
+                        
                         <ButtonGroup variant="contained"  aria-label="contained primary button group">
                             <Button disabled={ isSubmitting || !dirty || !isValid} loading={loading} floated='right' positive type='submit' content='Submit' />                                                
                             <Button onClick={handleDelete} content='Delete' floated='right' type='button' />

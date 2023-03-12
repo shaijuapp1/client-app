@@ -54,10 +54,11 @@ export default class AppConfigStore {
         try {
             var newID =  await agent.AppConfigs.create(item);
             //debugger;
-            // runInAction(() => {               
-            //     this.editMode = false;
-            //     this.loading = false;
-            // })
+            runInAction(() => {               
+                this.editMode = false;
+                this.loading = false;
+            })
+            
             return newID;
         } catch (error) {
             console.log(error);
