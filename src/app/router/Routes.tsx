@@ -23,6 +23,9 @@ import TableFieldList from '../../features/TableField/TableFieldList';
 import TableFieldDetails from '../../features/TableField/TableFieldDetails';
 import DataSecurityList from '../../features/DataSecurity/DataSecurityList';
 import DataSecurityDetails from '../../features/DataSecurity/DataSecurityDetails';
+import UserManagerList from '../../features/UserManager/UserManagerList';
+import UserManagerDetails from '../../features/UserManager/UserManagerDetails';
+import UserManagerNew from "../../features/UserManager/UserManagerNew";
 //##RouteImport##
 
 export const routes: RouteObject[] = [
@@ -70,6 +73,10 @@ export const routes: RouteObject[] = [
 			{path: 'DataSecurityList', element: <DataSecurityList />},
 			{path: 'DataSecurityDetails/:id', element: <DataSecurityDetails />},
 			{path: 'CreateDataSecurity', element: <DataSecurityDetails  key='create'/>},
+            
+			{path: 'UserManagerList', element: <UserManagerList />},
+			{path: 'UserManagerDetails/:id', element: <UserManagerDetails />},
+			{path: 'CreateUserManager', element: <UserManagerNew  key='create'/>},
 			//##Route##
            
 
@@ -78,6 +85,7 @@ export const routes: RouteObject[] = [
 ]
 
 export const router = createBrowserRouter(routes);
+
 
 
 

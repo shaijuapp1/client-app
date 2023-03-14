@@ -11,6 +11,7 @@ import { AppConfig } from '../models/AppConfig';
 import { TableName } from '../models/TableName'
 import { TableField } from '../models/TableField'
 import { DataSecurity } from '../models/DataSecurity'
+import { UserManager } from '../models/UserManager'
 //##AgentHeader##
 
 const sleep = (delay: number) => {
@@ -166,6 +167,19 @@ const DataSecuritys = {
     update: (item: DataSecurity) => requests.put<void>(`/DataSecuritys/${item.id}`, item),
     delete: (id: string) => requests.del<void>(`/DataSecuritys/${id}`)
 }
+
+
+const UserManagers = {
+    list: () => requests.get<UserManager[]>(`/UserManagers`),
+    details: (id: string) => requests.get<UserManager>(`/UserManagers/${id}`),
+    create: (item: UserManager) => {
+        const { id: _, ...NewUserManager } = item;
+        var res = requests.post<number>(`/UserManagers`, NewUserManager )
+        return res
+    },
+    update: (item: UserManager) => requests.put<void>(`/UserManagers/${item.id}`, item),
+    delete: (id: string) => requests.del<void>(`/UserManagers/${id}`)
+}
 //##AgentData##
 
 const Account = {
@@ -183,11 +197,13 @@ const agent = {
 	TableNames, 
 	TableFields, 
 	DataSecuritys, 
+	UserManagers, 
 	//##AgentTitle##
     
 }
 
 export default agent;
+
 
 
 

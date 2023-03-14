@@ -8,6 +8,7 @@ import ValidationError from "../errors/ValidationError";
 
 export default observer(function RegsiterForm() {
     const { userStore } = useStore();
+    
     return (
         <Formik
             initialValues={{ displayName: '', username: '', email: '', password: '', error: null }}
@@ -35,7 +36,7 @@ export default observer(function RegsiterForm() {
                         positive content='Register' 
                         type="submit" fluid 
                     />
-                </Form>
+                </Form> 
             )}
 
         </Formik>
