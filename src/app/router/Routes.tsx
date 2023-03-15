@@ -26,6 +26,8 @@ import DataSecurityDetails from '../../features/DataSecurity/DataSecurityDetails
 import UserManagerList from '../../features/UserManager/UserManagerList';
 import UserManagerDetails from '../../features/UserManager/UserManagerDetails';
 import UserManagerNew from "../../features/UserManager/UserManagerNew";
+import RoleMasterList from '../../features/RoleMaster/RoleMasterList';
+import RoleMasterDetails from '../../features/RoleMaster/RoleMasterDetails';
 //##RouteImport##
 
 export const routes: RouteObject[] = [
@@ -77,6 +79,11 @@ export const routes: RouteObject[] = [
 			{path: 'UserManagerList', element: <UserManagerList />},
 			{path: 'UserManagerDetails/:id', element: <UserManagerDetails />},
 			{path: 'CreateUserManager', element: <UserManagerNew  key='create'/>},
+            
+			{path: 'RoleMasterList', element: <RoleMasterList />},
+			{path: 'RoleMasterDetails/:id', element: <RoleMasterDetails />},
+			{path: 'CreateRoleMaster', element: <RoleMasterDetails  key='create'/>},
+
 			//##Route##
            
 
@@ -85,6 +92,7 @@ export const routes: RouteObject[] = [
 ]
 
 export const router = createBrowserRouter(routes);
+
 
 
 

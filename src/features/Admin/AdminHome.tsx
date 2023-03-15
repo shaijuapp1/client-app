@@ -79,6 +79,18 @@ export default observer(function AdminHome() {
                 </Card.Content>
             </Card>
 
+            <Card>
+                <Card.Content>                    
+                    <Card.Header>User Roles</Card.Header>                                      
+                </Card.Content>
+                <Card.Content extra>
+                    <div className='ui two buttons'>                    
+                    <Button as={NavLink} to='/RoleMasterList' basic color='green' content='List' />
+                    <Button as={NavLink} to='/CreateRoleMaster' basic color='green' content='Add New' />                                                       
+                    </div>
+                </Card.Content>
+            </Card>
+
         </Card.Group>
     )
 })

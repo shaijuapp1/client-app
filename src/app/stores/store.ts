@@ -11,6 +11,7 @@ import TableNameStore from './TableNameStore';
 import TableFieldStore from './TableFieldStore';
 import DataSecurityStore from './DataSecurityStore';
 import UserManagerStore from './UserManagerStore';
+import RoleMasterStore from './RoleMasterStore';
 //##StoreImport##"
 
 interface Store {
@@ -25,6 +26,7 @@ interface Store {
 	TableFieldStore: TableFieldStore;
 	DataSecurityStore: DataSecurityStore;
 	UserManagerStore: UserManagerStore;
+	RoleMasterStore: RoleMasterStore;
 	//##StoreImportInterface##
 }
 
@@ -40,6 +42,7 @@ export const store: Store = {
 	TableFieldStore: new TableFieldStore(),
 	DataSecurityStore: new DataSecurityStore(),
 	UserManagerStore: new UserManagerStore(),
+	RoleMasterStore: new RoleMasterStore(),
 	//##StoreImportConst##"
 }
 
@@ -48,6 +51,7 @@ export const StoreContext = createContext(store);
 export function useStore() {
     return useContext(StoreContext);
 }
+
 
 
 
