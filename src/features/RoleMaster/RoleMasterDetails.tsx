@@ -5,16 +5,17 @@ import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import LoadingComponent from "../../app/layout/LoadingComponent";
 import { useStore } from "../../app/stores/store";
-import { RoleMaster } from "../../app/models/RoleMaster";
+import { RoleMaster, RoleUser } from "../../app/models/RoleMaster";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import MyTextInput from "../../app/common/form/MyTextInput";
 import MyDateInput from "../../app/common/form/MyDateInput";
+import MaterialTable from "material-table";
 
 
 
 export default observer(function RoleMasterDetails() {
     const { RoleMasterStore } = useStore();
-    const { loadItem, item, loading, updateItem, createItem, deleteItem } = RoleMasterStore;
+    const { loadItem, item, loading, updateItem, createItem, deleteItem, GroupUserList } = RoleMasterStore;
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -22,10 +23,28 @@ export default observer(function RoleMasterDetails() {
         id: '',
         name: '',
     });
+    const [roleUserList, setRoleUserList] = useState<RoleUser[]>()
     
     const validationSchema = Yup.object({
         name: Yup.string().required('The event title is required'),       
     });
+
+    const TableColumns = [
+        {
+          title: "Display Name",
+          field: "Display Name",          
+          defaultSort: "asc",
+        //   filtering: false,
+        },
+        {
+          title: "User Name",
+          field: "Username",          
+        },
+        {
+          title: "Email",
+          field: "Email",          
+        }
+    ];
 
     useEffect(() => {
              
@@ -33,6 +52,11 @@ export default observer(function RoleMasterDetails() {
             loadItem(id).then(it =>{ 
                 debugger;
                 setRoleMaster(it!)
+                if(it?.name){
+                    GroupUserList(it?.name).then( (users) => {
+                        setRoleUserList(users)
+                    })
+                } 
             });
         } 
         
@@ -55,7 +79,6 @@ export default observer(function RoleMasterDetails() {
                 action.setSubmitting(false)
                 navigate(`/RoleMasterList`)
             })
-
         }
     }
 
@@ -85,6 +108,19 @@ export default observer(function RoleMasterDetails() {
                     </Form>
                 )}
             </Formik>
+
+            <div className={"tabcontainers1"}>
+                <div className={"tabcontainers2"} >     
+                { roleUserList  &&   
+                <MaterialTable                    
+                    title="Application Configration"
+                    data={roleUserList}
+                    columns={TableColumns as any}
+                    options={{ sorting:true, search: true, paging: true, filtering: true, exportButton: true, pageSize:10 }}            
+                />
+                }
+                </div>
+            </div>
         </Segment>        
     )
 })

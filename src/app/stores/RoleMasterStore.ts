@@ -2,7 +2,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import agent from "../api/agent";
 import { v4 as uuid } from 'uuid';
 import { ActionTask } from "../models/ActionTask";
-import { RoleMaster } from "../models/RoleMaster";
+import { RoleMaster, RoleUser } from "../models/RoleMaster";
 
 export default class RoleMasterStore {
 
@@ -14,6 +14,8 @@ export default class RoleMasterStore {
     loadingInitial = false;
     itemList: RoleMaster[] = [];
     item?: RoleMaster = undefined;
+
+    roleUserList: RoleUser[] = [];
 
     constructor() {
         makeAutoObservable(this)
@@ -108,6 +110,17 @@ export default class RoleMasterStore {
         }
     }
 
+    GroupUserList = async (id: string) => {
+        this.setLoadingInitial(true);
+        try {            
+            this.roleUserList =  await agent.RoleMasters.RoleUserList(id);
+            this.setLoadingInitial(false);
+            return this.roleUserList;
+        } catch (error) {
+            console.log(error);
+            this.setLoadingInitial(false);
+        }
+    }
 
 }
 

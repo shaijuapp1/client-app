@@ -12,7 +12,7 @@ import { TableName } from '../models/TableName'
 import { TableField } from '../models/TableField'
 import { DataSecurity } from '../models/DataSecurity'
 import { UserManager } from '../models/UserManager'
-import { RoleMaster } from '../models/RoleMaster'
+import { RoleMaster, RoleUser } from '../models/RoleMaster'
 //##AgentHeader##
 
 const sleep = (delay: number) => {
@@ -196,7 +196,8 @@ const RoleMasters = {
         return res
     },
     update: (item: RoleMaster) => requests.put<void>(`/RoleMasters/${item.id}`, item),
-    delete: (id: string) => requests.del<void>(`/RoleMasters/${id}`)
+    delete: (id: string) => requests.del<void>(`/RoleMasters/${id}`),
+    RoleUserList : (id: string) => requests.get<RoleUser[]>(`/RoleUserList/${id}`),
 }
 //##AgentData##
 
