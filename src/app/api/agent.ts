@@ -185,7 +185,11 @@ const UserManagers = {
 
 const RoleMasters = {
     list: () => requests.get<RoleMaster[]>(`/RoleMasters`),
-    details: (id: string) => requests.get<RoleMaster>(`/RoleMasters/${id}`),
+    details: (id: string) => {
+        debugger
+        var res = requests.get<RoleMaster>(`/RoleMasters/${id}`)
+        return res
+    },//requests.get<RoleMaster>(`/RoleMasters/${id}`),
     create: (item: RoleMaster) => {
         const { id: _, ...NewRoleMaster } = item;
         var res = requests.post<number>(`/RoleMasters`, NewRoleMaster )

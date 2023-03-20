@@ -20,11 +20,11 @@ export default observer(function RoleMasterDetails() {
 
     const [RoleMaster, setRoleMaster] = useState<RoleMaster>({
         id: '',
-        title: '',
+        name: '',
     });
     
     const validationSchema = Yup.object({
-        title: Yup.string().required('The event title is required'),       
+        name: Yup.string().required('The event title is required'),       
     });
 
     useEffect(() => {
@@ -47,12 +47,12 @@ export default observer(function RoleMasterDetails() {
 
             createItem(newRoleMaster).then( (newID) => {
                 action.setSubmitting(false)
-                navigate(`/RoleMasterDetails/${newID}`)
+                navigate(`/RoleMasterList`)
             } )
         } else {            
             updateItem(RoleMaster).then(() => {
                 action.setSubmitting(false)
-                navigate(`/RoleMasterDetails/${RoleMaster.id}`)
+                navigate(`/RoleMasterList`)
             })
 
         }
@@ -74,7 +74,7 @@ export default observer(function RoleMasterDetails() {
                 onSubmit={(values, action) => handleFormSubmit(values, action)}>
                 {({ handleSubmit, isValid, isSubmitting, dirty }) => (
                     <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
-                        <MyTextInput name='title' placeholder='Title' />
+                        <MyTextInput name='name' placeholder='Name' />
                         <ButtonGroup variant="contained"  aria-label="contained primary button group">
                             <Button disabled={ isSubmitting || !dirty || !isValid} loading={loading} floated='right' positive type='submit' content='Submit' />                                                
                             <Button onClick={handleDelete} content='Delete' floated='right' type='button' />

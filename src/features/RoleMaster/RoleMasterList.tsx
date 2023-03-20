@@ -22,9 +22,9 @@ export default observer(function RoleMasterList() {
         //   filtering: false,
         },
         {
-          title: "Title",
-          field: "title",
-          render : (values: RoleMaster) => { return <NavLink to={`/RoleMasterdetails/${values.id}` } >{values.title}</NavLink> },
+          title: "Name",
+          field: "name",
+          render : (values: RoleMaster) => { return <NavLink to={`/RoleMasterdetails/${values.id}` } >{values.name}</NavLink> },
         }
     ];
 
