@@ -11,6 +11,7 @@ import MyTextInput from "../../app/common/form/MyTextInput";
 import MyDropdownInput from "../../app/common/form/MyDropdownInput";
 import { DataSecurityAccessType } from "../../app/common/options/DataSecurityAccessType";
 import { DataSecurityAccess } from "../../app/common/options/DataSecurityAccess";
+import UserSelect from "../../app/common/form/UserSelect";
 
 
 export default observer(function DataSecurityDetails() {
@@ -100,6 +101,8 @@ export default observer(function DataSecurityDetails() {
                             name='filedType' placeholder='Access Type' />
 
                         <MyDropdownInput  label="Access" options={DataSecurityAccess}                             
+                            name='itemList' placeholder='Access'  multiple={true}/>
+                        <UserSelect label="User" options={DataSecurityAccess}                             
                             name='itemList' placeholder='Access'  multiple={true}/>
 
 {/*

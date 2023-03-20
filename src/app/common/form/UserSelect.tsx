@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {useField} from "formik";
 import {Dropdown, Form, Label, Select} from "semantic-ui-react";
+import { useStore } from '../../stores/store';
+import { DropDownList } from '../../models/DropDownList';
 
 interface Props {
     placeholder: string;
@@ -10,32 +12,81 @@ interface Props {
     multiple?:boolean;
 }
 
+
+const userList:DropDownList[] = []
+
 export default function UserSelect(props: Props) {
     const [field, meta, helpers] = useField(props.name);
 
-    useEffect(() => {
+    const { UserManagerStore } = useStore();
+    const { refreshAllUsers } = UserManagerStore;
 
-    })
+    // const [UserList, setUserList] = useState<DropDownList[]>()    
+    // function refreshUsers(searchQuery: string) {
+
+    //     let userList:DropDownList[] = []
+
+    //     refreshAllUsers().then( (itms) =>{
+
+    //         searchQuery = searchQuery.toLocaleLowerCase()
+    //         itms?.map( (itm) =>{
+    //             if(itm.displayName.toLocaleLowerCase().includes(searchQuery)){
+    //                 userList.push({
+    //                     text :itm.displayName,
+    //                     key :itm.username,
+    //                     value : itm.username
+    //                 })
+    //             }                
+    //         })
+    //         debugger
+    //         setUserList(userList)
+    //     })
+    // }
+
+
+    useEffect(() => {
+        refreshAllUsers().then((itms)=>{            
+            itms?.forEach( (itm) => {
+                userList.push({
+                    text :itm.displayName,
+                    key :itm.username,
+                    value : itm.username
+                })
+            })                     
+        });       
+    }, [refreshAllUsers])
     
-    const renderLabel = (option: any) => ({
-        text: option.title,
-        value: option.id,    
-      })
+  
 
     return (
         <Form.Field error={meta.touched && !!meta.error}>
             <label>{props.label}</label>          
             <Dropdown
-                options={props.options}
+                options={userList}
                 value={field.value || null}
-                onChange={(e, d) => {helpers.setValue(d.value)}}
-                onBlur={() => helpers.setTouched(true)}
+
+                // onSearchChange={(e, { searchQuery }) => {
+                //     debugger;
+                //     console.log(searchQuery)
+                //     refreshUsers(searchQuery)
+                // }}
+
+                onChange={(e, d) => {
+                    debugger;
+                    helpers.setValue(d.value)}
+                }
+                onBlur={(e, d) => {
+                    debugger;
+                    helpers.setTouched(true)
+                }}
                 placeholder={props.placeholder}
                 fluid
                 search
                 selection
                 multiple={props.multiple}   
             />
+
+            
 
   
             {meta.touched && meta.error ? (

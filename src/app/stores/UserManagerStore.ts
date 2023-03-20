@@ -31,6 +31,24 @@ export default class UserManagerStore {
         }
     }
 
+    refreshAllUsers = async () => {
+        debugger;
+        if( this.itemList.length > 0){
+            return this.itemList;
+        }
+        else{
+            this.setLoadingInitial(true);
+            try {            
+                this.itemList =  await agent.UserManagers.list();;
+                this.setLoadingInitial(false);
+                return this.itemList;
+            } catch (error) {
+                console.log(error);
+                this.setLoadingInitial(false);
+            }
+        }       
+    }
+
     loadItem = async (id: string) => {
         this.setLoadingInitial(true);
         try {            
