@@ -10,6 +10,8 @@ interface Props {
     options: any;
     label?: string;
     multiple?:boolean;
+    showGroup?:boolean;
+    
 }
 
 
@@ -18,8 +20,9 @@ const userList:DropDownList[] = []
 export default function UserSelect(props: Props) {
     const [field, meta, helpers] = useField(props.name);
 
-    const { UserManagerStore } = useStore();
+    const { UserManagerStore, RoleMasterStore } = useStore();
     const { refreshAllUsers } = UserManagerStore;
+    const { refreshAllRoles } = RoleMasterStore;
 
     // const [UserList, setUserList] = useState<DropDownList[]>()    
     // function refreshUsers(searchQuery: string) {
@@ -48,11 +51,23 @@ export default function UserSelect(props: Props) {
         refreshAllUsers().then((itms)=>{            
             itms?.forEach( (itm) => {
                 userList.push({
-                    text :itm.displayName,
-                    key :itm.username,
-                    value : itm.username
+                    text :"U:" + itm.displayName,
+                    key :"U:" + itm.username,
+                    value : "U:" + itm.username
                 })
-            })                     
+            })
+            
+            if(props.showGroup){
+                refreshAllRoles().then((itms1)=>{   
+                    itms1?.forEach( (itm) => {
+                        userList.push({
+                            text :"G:" + itm.name,
+                            key : "G:" + itm.name,
+                            value : "G:" + itm.name
+                        })
+                    })
+                })
+            }
         });       
     }, [refreshAllUsers])
     

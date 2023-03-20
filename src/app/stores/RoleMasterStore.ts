@@ -24,12 +24,24 @@ export default class RoleMasterStore {
         try {            
             this.itemList =  await agent.RoleMasters.list();;
             this.setLoadingInitial(false);
-            return this.item;
+            return this.itemList;
         } catch (error) {
             console.log(error);
             this.setLoadingInitial(false);
         }
     }
+
+    refreshAllRoles = async () => {
+        debugger;
+        if( this.itemList.length > 0){
+            return this.itemList;
+        }
+        else{
+            return this.loadItems()          
+        }        
+    }
+
+
 
     loadItem = async (id: string) => {
         this.setLoadingInitial(true);

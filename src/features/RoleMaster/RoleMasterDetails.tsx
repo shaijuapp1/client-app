@@ -46,6 +46,7 @@ export default observer(function RoleMasterDetails() {
             };
 
             createItem(newRoleMaster).then( (newID) => {
+                debugger;
                 action.setSubmitting(false)
                 navigate(`/RoleMasterList`)
             } )
