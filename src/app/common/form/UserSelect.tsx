@@ -7,7 +7,6 @@ import { DropDownList } from '../../models/DropDownList';
 interface Props {
     placeholder: string;
     name: string;
-    options: any;
     label?: string;
     multiple?:boolean;
     showGroup?:boolean;

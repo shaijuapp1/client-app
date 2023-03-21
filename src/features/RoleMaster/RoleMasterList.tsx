@@ -14,22 +14,18 @@ export default observer(function RoleMasterList() {
     const { RoleMasterStore } = useStore();
     const { loadItems,  itemList } = RoleMasterStore;
 
-    const TableColumns = [
-        {
-          title: "id",
-          field: "id",          
-          defaultSort: "asc",
-        //   filtering: false,
-        },
+    const TableColumns = [       
         {
           title: "Name",
           field: "name",
-          render : (values: RoleMaster) => { return <NavLink to={`/RoleMasterdetails/${values.id}` } >{values.name}</NavLink> },
+          render : (values: RoleMaster) => { return <NavLink to={`/RoleMasterdetails/${values.name}` } >{values.name}</NavLink> },
         }
     ];
 
     useEffect(() => {
-        loadItems();
+        loadItems().then( () => {
+          
+        });
     }, [loadItems])
 
     if (RoleMasterStore.loadingInitial) return <LoadingComponent content='Loading To Do List..' />

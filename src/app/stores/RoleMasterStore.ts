@@ -2,7 +2,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import agent from "../api/agent";
 import { v4 as uuid } from 'uuid';
 import { ActionTask } from "../models/ActionTask";
-import { RoleMaster, RoleUser } from "../models/RoleMaster";
+import { RoleMaster, RoleUser, UserRole } from "../models/RoleMaster";
 
 export default class RoleMasterStore {
 
@@ -121,6 +121,37 @@ export default class RoleMasterStore {
             this.setLoadingInitial(false);
         }
     }
+
+    AddUserToRole = async (item: UserRole) => {
+        debugger
+        this.loading = true;       
+        try {
+            var newID =  await agent.RoleMasters.AddUserToRole(item);
+            debugger;          
+            this.loading = false;
+            return newID;
+        } catch (error) {
+            console.log(error);
+            runInAction(() => this.loading = false);
+        }
+    }
+
+    RemoveUserFromRole = async (item: UserRole) => {
+        this.loading = true;
+        try {
+            await agent.RoleMasters.RemoveUserFromRole(item);
+            runInAction(() => {                
+                this.loading = false;
+            })
+        } catch (error) {
+            console.log(error);
+            runInAction(() => {
+                this.loading = false;
+            })
+        }
+    }
+
+
 
 }
 

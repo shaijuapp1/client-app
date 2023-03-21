@@ -102,7 +102,7 @@ export default observer(function DataSecurityDetails() {
 
                         <MyDropdownInput  label="Access" options={DataSecurityAccess}                             
                             name='itemList' placeholder='Access'  multiple={true}/>
-                        <UserSelect label="Access" options={DataSecurityAccess}                             
+                        <UserSelect label="Access"                             
                             name='accessList' placeholder='Access'  multiple={true} showGroup={true} />
 
 {/*
