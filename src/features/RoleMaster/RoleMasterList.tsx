@@ -62,3 +62,20 @@ export default observer(function RoleMasterList() {
       </List>  
     )
 })
+
+/*
+localhost:5000/api/RoleMasters/AddUserToRole
+
+{	
+	"RoleName": "t2",
+  "UserName": "shaiju"
+}
+
+localhost:5000/api/RoleMasters/RemoveUserFromRole
+
+{	
+	"RoleName": "t2",
+  "UserName": "shaiju"
+}
+
+*/
