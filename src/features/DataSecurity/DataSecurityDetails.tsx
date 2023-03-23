@@ -15,19 +15,23 @@ import UserSelect from "../../app/common/form/UserSelect";
 
 
 export default observer(function DataSecurityDetails() {
-    const { DataSecurityStore, AppConfigTypeStore } = useStore();
+    const { DataSecurityStore, TableNameStore } = useStore();
     const { loadItem, item, loading, updateItem, createItem, deleteItem } = DataSecurityStore;
     const { id } = useParams();
     const navigate = useNavigate();
+    //const [accessList, setAccessList] = useState<string[]>([])
 
     const [DataSecurity, setDataSecurity] = useState<DataSecurity>({
         id: '',
         tableId: '',
-        statusId:'',
-        asccessType:'',
-        filedId:'',
-        userId:'',
+        accessType:'',
         access:'',
+        accessList : [],
+
+        statusId:'',        
+        filedId:'',
+        userId:[],
+       
         itemList: []
     });
     
@@ -36,16 +40,35 @@ export default observer(function DataSecurityDetails() {
     });
 
     useEffect(() => {
-        if(!AppConfigTypeStore.itemList.length){
-            AppConfigTypeStore.loadItems()
+        
+        if(!TableNameStore.itemList.length){
+            TableNameStore.loadItems()
         }
 
         if (id){
             loadItem(id).then(it =>{ 
-                debugger;
-                setDataSecurity(it!)
+                //debugger;               
+                let accList:string[]= []                
+                if(it?.access){
+                    it.accessList = it?.access.split(";");
+                }
+                               
+                let userId:string[] = []  
+                
+                if(it) {
+                    userId.push("U:6d61a4e4-2fe8-480e-b696-b765d5fc3936")   
+                    userId.push("U:0886af3e-b6c5-432a-9253-d8d52e308197")       
+                    //userId.push(it.userId[0])
+                    // for(let i=0;i<it.userId.length;i++){
+                    //     userId.push(it.userId[i])
+                    // }
+                    it.userId = userId;
+                }
+
+                setDataSecurity(it!)    
+                   
             });
-        } 
+        }
         
     }, [id, loadItem])
 
@@ -73,7 +96,7 @@ export default observer(function DataSecurityDetails() {
         if (id) deleteItem(id).then(() => navigate('/DataSecurityList/'))
     }
 
-    if (AppConfigTypeStore.itemList.length > 0 && DataSecurityStore.loadingInitial) return <LoadingComponent content='Loading DataSecurity details' />
+    if (  TableNameStore.itemList.length > 0 && DataSecurityStore.loadingInitial) return <LoadingComponent content='Loading DataSecurity details' />
 
     return (
         <Segment clearing>
@@ -87,7 +110,7 @@ export default observer(function DataSecurityDetails() {
                     <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
                         
                          <MyDropdownInput  label="Table Name" options={                            
-                            AppConfigTypeStore.itemList?.map( ds => {
+                            TableNameStore.itemList?.map( ds => {
                                     return {
                                         key: ds.id,
                                         text: ds.title,
@@ -98,52 +121,13 @@ export default observer(function DataSecurityDetails() {
                             name='tableId' placeholder='Table Name' />
 
                         <MyDropdownInput  label="Access Type" options={DataSecurityAccessType}                             
-                            name='filedType' placeholder='Access Type' />
+                            name='accessType' placeholder='Access Type' />
 
                         <MyDropdownInput  label="Access" options={DataSecurityAccess}                             
-                            name='itemList' placeholder='Access'  multiple={true}/>
-                        <UserSelect label="Access"                             
-                            name='accessList' placeholder='Access'  multiple={true} showGroup={true} />
+                            name='accessList' placeholder='Access'  multiple={true}/>
 
-{/*
-                        <MyDropdownInput  label="Status Config Name" options={                            
-                            AppConfigTypeStore.itemList?.map( ds => {
-                                    return {
-                                        key: ds.id,
-                                        text: ds.title,
-                                        value: ds.id
-                                    }
-                                })
-                            }                             
-                            name='statusId' placeholder='Status Config Name' />
-
-
-
-                         <MyDropdownInput  label="Table" options={                            
-                            TableNameStore.itemList?.map( ds => {
-                                    return {
-                                        key: ds.id,
-                                        text: ds.title,
-                                        value: ds.id
-                                    }
-                                })
-                            }                             
-                            name='TableId' placeholder='Table' />
-
-                        <MyDropdownInput  label="Table" options={                            
-                            TableNameStore.itemList?.map( ds => {
-                                    return {
-                                        key: ds.id,
-                                        text: ds.title,
-                                        value: ds.id
-                                    }
-                                })
-                            }                             
-                            name='statusId' placeholder='Status' />
-                            <MyTextInput name='title' placeholder='Title' />
-
-                            */}
-
+                        <UserSelect label="User/Group"                             
+                            name='userId' placeholder='Access'  multiple={true} showGroup={true} />
                         
                         <ButtonGroup variant="contained"  aria-label="contained primary button group">
                             <Button disabled={ isSubmitting || !dirty || !isValid} loading={loading} floated='right' positive type='submit' content='Submit' />                                                

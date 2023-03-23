@@ -35,7 +35,7 @@ export default class DataSecurityStore {
         this.setLoadingInitial(true);
         try {            
             this.item =  await agent.DataSecuritys.details(id);
-            debugger;
+            //debugger;
             this.setLoadingInitial(false);
             return this.item;
         } catch (error) {

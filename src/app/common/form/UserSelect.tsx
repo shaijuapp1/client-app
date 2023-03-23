@@ -3,14 +3,14 @@ import {useField} from "formik";
 import {Dropdown, Form, Label, Select} from "semantic-ui-react";
 import { useStore } from '../../stores/store';
 import { DropDownList } from '../../models/DropDownList';
+import LoadingComponent from '../../layout/LoadingComponent';
 
 interface Props {
     placeholder: string;
     name: string;
     label?: string;
     multiple?:boolean;
-    showGroup?:boolean;
-    
+    showGroup?:boolean;    
 }
 
 
@@ -51,8 +51,8 @@ export default function UserSelect(props: Props) {
             itms?.forEach( (itm) => {
                 userList.push({
                     text :"U:" + itm.displayName,
-                    key :"U:" + itm.username,
-                    value : "U:" + itm.username
+                    key :"U:" + itm.id,
+                    value : "U:" + itm.id
                 })
             })
             
@@ -61,8 +61,8 @@ export default function UserSelect(props: Props) {
                     itms1?.forEach( (itm) => {
                         userList.push({
                             text :"G:" + itm.name,
-                            key : "G:" + itm.name,
-                            value : "G:" + itm.name
+                            key : "G:" + itm.id,
+                            value : "G:" + itm.id
                         })
                     })
                 })
@@ -70,11 +70,15 @@ export default function UserSelect(props: Props) {
         });       
     }, [refreshAllUsers])
     
-  
+   
+
 
     return (
+
+        
+
         <Form.Field error={meta.touched && !!meta.error}>
-            <label>{props.label}</label>          
+            <label>{props.label} </label>          
             <Dropdown
                 options={userList}
                 value={field.value || null}

@@ -32,7 +32,7 @@ export default class UserManagerStore {
     }
 
     refreshAllUsers = async () => {
-        debugger;
+        //debugger;
         if( this.itemList.length > 0){
             return this.itemList;
         }

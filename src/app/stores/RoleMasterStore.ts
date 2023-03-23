@@ -34,7 +34,7 @@ export default class RoleMasterStore {
     }
 
     refreshAllRoles = async () => {
-        debugger;
+        //debugger;
         if( this.itemList.length > 0){
             return this.itemList;
         }
