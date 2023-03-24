@@ -4,8 +4,8 @@ export interface DataSecurity {
 	accessType: string
 	access: string
 	accessList: string[];
-	userId: string[];
-
+	userID: string[];
+	userIdList: string[];
 	statusId: string	
 	filedId: string		
 	itemList: string[];

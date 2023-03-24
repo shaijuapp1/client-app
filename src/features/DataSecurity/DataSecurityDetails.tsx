@@ -30,8 +30,8 @@ export default observer(function DataSecurityDetails() {
 
         statusId:'',        
         filedId:'',
-        userId:[],
-       
+        userID:[],       
+        userIdList:[],
         itemList: []
     });
     
@@ -55,15 +55,14 @@ export default observer(function DataSecurityDetails() {
                                
                 let userId:string[] = []  
                 
-                if(it) {
-                    userId.push("U:6d61a4e4-2fe8-480e-b696-b765d5fc3936")   
-                    userId.push("U:0886af3e-b6c5-432a-9253-d8d52e308197")       
-                    //userId.push(it.userId[0])
-                    // for(let i=0;i<it.userId.length;i++){
-                    //     userId.push(it.userId[i])
-                    // }
-                    it.userId = userId;
-                }
+                // if(it) {
+                //     it.userIdList = it?.userID
+                //     // for(let i=0;i<it.userID.length;i++){
+                //     //     userId.push(it.userID[i])
+                //     // }
+                //     // it.userIdList = userId;
+                // }
+               
 
                 setDataSecurity(it!)    
                    
@@ -127,7 +126,7 @@ export default observer(function DataSecurityDetails() {
                             name='accessList' placeholder='Access'  multiple={true}/>
 
                         <UserSelect label="User/Group"                             
-                            name='userId' placeholder='Access'  multiple={true} showGroup={true} />
+                            name='userID' placeholder='Access'  multiple={true} showGroup={true} />
                         
                         <ButtonGroup variant="contained"  aria-label="contained primary button group">
                             <Button disabled={ isSubmitting || !dirty || !isValid} loading={loading} floated='right' positive type='submit' content='Submit' />                                                
