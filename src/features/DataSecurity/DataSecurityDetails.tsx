@@ -51,21 +51,16 @@ export default observer(function DataSecurityDetails() {
                 let accList:string[]= []                
                 if(it?.access){
                     it.accessList = it?.access.split(";");
-                }
-                               
-                let userId:string[] = []  
-                
+                }                               
+                let userId:string[] = []                  
                 // if(it) {
                 //     it.userIdList = it?.userID
                 //     // for(let i=0;i<it.userID.length;i++){
                 //     //     userId.push(it.userID[i])
                 //     // }
                 //     // it.userIdList = userId;
-                // }
-               
-
-                setDataSecurity(it!)    
-                   
+                // }               
+                setDataSecurity(it!)                       
             });
         }
         
@@ -77,6 +72,8 @@ export default observer(function DataSecurityDetails() {
             let newDataSecurity = {
                 ...DataSecurity
             };
+
+            newDataSecurity.access = DataSecurity.accessList.join(';');
 
             createItem(newDataSecurity).then( (newID) => {
                 action.setSubmitting(false)
@@ -116,7 +113,7 @@ export default observer(function DataSecurityDetails() {
                                         value: ds.id
                                     }
                                 })
-                            }                             
+                            }                         
                             name='tableId' placeholder='Table Name' />
 
                         <MyDropdownInput  label="Access Type" options={DataSecurityAccessType}                             

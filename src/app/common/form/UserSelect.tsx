@@ -82,6 +82,7 @@ export default function UserSelect(props: Props) {
             <Dropdown
                 options={userList}
                 value={field.value || null}
+                key={field.value || null}
 
                 // onSearchChange={(e, { searchQuery }) => {
                 //     debugger;
@@ -90,11 +91,11 @@ export default function UserSelect(props: Props) {
                 // }}
 
                 onChange={(e, d) => {
-                    debugger;
+                    //debugger;
                     helpers.setValue(d.value)}
                 }
                 onBlur={(e, d) => {
-                    debugger;
+                    //debugger;
                     helpers.setTouched(true)
                 }}
                 placeholder={props.placeholder}

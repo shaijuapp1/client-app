@@ -25,6 +25,7 @@ export default function MyDropdownInput(props: Props) {
             <Dropdown
                 options={props.options}
                 value={field.value || null}
+                key={field.value || null}
                 onChange={(e, d) => {helpers.setValue(d.value)}}
                 onBlur={() => helpers.setTouched(true)}
                 placeholder={props.placeholder}
