@@ -41,7 +41,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "set BUILD_PATH=../AppWeb/AppWeb/API/wwwroot&& react-scripts build",
+    "build": "set BUILD_PATH=wwwroot&& react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
