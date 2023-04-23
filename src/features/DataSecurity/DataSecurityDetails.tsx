@@ -68,6 +68,9 @@ export default observer(function DataSecurityDetails() {
 
     function handleFormSubmit(DataSecurity: DataSecurity, action : any) {
         debugger
+
+        DataSecurity.access = DataSecurity.accessList.join(';');
+
         if (DataSecurity.id.length === 0) {
             let newDataSecurity = {
                 ...DataSecurity
