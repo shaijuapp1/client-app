@@ -33,7 +33,7 @@ export default function MyDropdownInput(props: Props) {
                 search
                 selection
                 multiple={props.multiple}  
-            />
+            /> 
 
   
             {meta.touched && meta.error ? (

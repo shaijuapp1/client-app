@@ -16,11 +16,12 @@ export default class UserStore {
     }
 
     login = async (creds: UserFormValues) => {
+        debugger;
         try {
             const user = await agent.Account.login(creds);
             store.commonStore.setToken(user.token);
             runInAction(() => this.user = user);
-            router.navigate('/activities');
+            router.navigate('/AdminHome');
             store.modalStore.closeModal();
         } catch (error) {
             throw error;

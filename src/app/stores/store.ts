@@ -12,6 +12,9 @@ import TableFieldStore from './TableFieldStore';
 import DataSecurityStore from './DataSecurityStore';
 import UserManagerStore from './UserManagerStore';
 import RoleMasterStore from './RoleMasterStore';
+import ActionTrackerAuditLogStore from './ActionTrackerAuditLogStore';
+import ActionTackerTypesListStore from './ActionTackerTypesListStore';
+import ActionTackerTaskListStore from './ActionTackerTaskListStore';
 //##StoreImport##"
 
 interface Store {
@@ -27,6 +30,9 @@ interface Store {
 	DataSecurityStore: DataSecurityStore;
 	UserManagerStore: UserManagerStore;
 	RoleMasterStore: RoleMasterStore;
+	ActionTrackerAuditLogStore: ActionTrackerAuditLogStore;
+	ActionTackerTypesListStore: ActionTackerTypesListStore;
+	ActionTackerTaskListStore: ActionTackerTaskListStore;
 	//##StoreImportInterface##
 }
 
@@ -43,6 +49,9 @@ export const store: Store = {
 	DataSecurityStore: new DataSecurityStore(),
 	UserManagerStore: new UserManagerStore(),
 	RoleMasterStore: new RoleMasterStore(),
+	ActionTrackerAuditLogStore: new ActionTrackerAuditLogStore(),
+	ActionTackerTypesListStore: new ActionTackerTypesListStore(),
+	ActionTackerTaskListStore: new ActionTackerTaskListStore(),
 	//##StoreImportConst##"
 }
 
@@ -51,6 +60,9 @@ export const StoreContext = createContext(store);
 export function useStore() {
     return useContext(StoreContext);
 }
+
+
+
 
 
 

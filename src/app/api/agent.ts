@@ -13,6 +13,9 @@ import { TableField } from '../models/TableField'
 import { DataSecurity } from '../models/DataSecurity'
 import { UserManager } from '../models/UserManager'
 import { RoleMaster, RoleUser, UserRole } from '../models/RoleMaster'
+import { ActionTrackerAuditLog } from '../models/ActionTrackerAuditLog'
+import { ActionTackerTypesList } from '../models/ActionTackerTypesList'
+import { ActionTackerTaskList } from '../models/ActionTackerTaskList'
 //##AgentHeader##
 
 const sleep = (delay: number) => {
@@ -124,7 +127,17 @@ const AppConfigs = {
         return res
     },
     update: (todo: AppConfig) => requests.put<void>(`/AppConfigs/${todo.id}`, todo),
-    delete: (id: string) => requests.del<void>(`/AppConfigs/${id}`)
+    delete: (id: string) => requests.del<void>(`/AppConfigs/${id}`),
+
+    loadConfigItems: (title: string) => {      
+            var res = requests.get<AppConfig[]>(`/AppConfigs/GetAppConfigList/${title}`)
+            return res
+        },
+
+    loadAuditLog: (type:string,id: string) => {
+        var res = requests.get<ActionTrackerAuditLog[]>(`/ActionTrackerAuditLogs/LogList/${type}/${id}`)
+        return res
+    },
 }
 
 
@@ -208,6 +221,53 @@ const RoleMasters = {
         return res
     }
 }
+
+
+const ActionTrackerAuditLogs = {
+    list: () => requests.get<ActionTrackerAuditLog[]>(`/ActionTrackerAuditLogs`),
+    details: (id: string) => requests.get<ActionTrackerAuditLog>(`/ActionTrackerAuditLogs/${id}`),
+    create: (item: ActionTrackerAuditLog) => {
+        const { id: _, ...NewActionTrackerAuditLog } = item;
+        var res = requests.post<number>(`/ActionTrackerAuditLogs`, NewActionTrackerAuditLog )
+        return res
+    },
+    update: (item: ActionTrackerAuditLog) => requests.put<void>(`/ActionTrackerAuditLogs/${item.id}`, item),
+    delete: (id: string) => requests.del<void>(`/ActionTrackerAuditLogs/${id}`)
+}
+
+
+const ActionTackerTypesLists = {
+    list: () => requests.get<ActionTackerTypesList[]>(`/ActionTackerTypesLists`),
+    details: (id: string) => requests.get<ActionTackerTypesList>(`/ActionTackerTypesLists/${id}`),
+    create: (item: ActionTackerTypesList) => {
+        debugger;
+        const { id: _, ...NewActionTackerTypesList } = item;
+        var res = requests.post<number>(`/ActionTackerTypesLists`, NewActionTackerTypesList )
+        return res
+    },
+    update: (item: ActionTackerTypesList) =>{ 
+        debugger;
+        requests.put<void>(`/ActionTackerTypesLists/${item.id}`, item)
+    },
+    delete: (id: string) => requests.del<void>(`/ActionTackerTypesLists/${id}`)
+}
+
+
+const ActionTackerTaskLists = {
+    list: () => requests.get<ActionTackerTaskList[]>(`/ActionTackerTaskLists`),
+    details: (id: string) => requests.get<ActionTackerTaskList>(`/ActionTackerTaskLists/${id}`),
+    create: (item: ActionTackerTaskList) => {
+        debugger;
+        const { id: _, ...NewActionTackerTaskList } = item;
+        var res = requests.post<number>(`/ActionTackerTaskLists`, NewActionTackerTaskList )
+        return res
+    },
+    update: (item: ActionTackerTaskList) => {
+        debugger;
+        requests.put<void>(`/ActionTackerTaskLists/${item.id}`, item)
+    },
+    delete: (id: string) => requests.del<void>(`/ActionTackerTaskLists/${id}`)
+}
 //##AgentData##
 
 const Account = {
@@ -227,11 +287,17 @@ const agent = {
 	DataSecuritys, 
 	UserManagers, 
 	RoleMasters, 
+	ActionTrackerAuditLogs, 
+	ActionTackerTypesLists, 
+	ActionTackerTaskLists, 
 	//##AgentTitle##
     
 }
 
 export default agent;
+
+
+
 
 
 

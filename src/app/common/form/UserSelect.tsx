@@ -47,13 +47,13 @@ export default function UserSelect(props: Props) {
 
 
     useEffect(() => {
-        refreshAllUsers().then((itms)=>{            
+        refreshAllUsers().then((itms)=>{             
             itms?.forEach( (itm) => {
                 userList.push({
                     text :"U:" + itm.displayName,
                     key :"U:" + itm.id,
                     value : "U:" + itm.id
-                })
+                })              
             })
             
             if(props.showGroup){
@@ -63,27 +63,21 @@ export default function UserSelect(props: Props) {
                             text :"G:" + itm.name,
                             key : "G:" + itm.id,
                             value : "G:" + itm.id
-                        })
+                        })                      
                     })
                 })
             }
         });       
     }, [refreshAllUsers])
-    
-   
-
-
+       
     return (
-
-        
-
         <Form.Field error={meta.touched && !!meta.error}>
             <label>{props.label} </label>          
             <Dropdown
                 options={userList}
                 value={field.value || null}
                 key={field.value || null}
-
+                
                 // onSearchChange={(e, { searchQuery }) => {
                 //     debugger;
                 //     console.log(searchQuery)
@@ -104,8 +98,6 @@ export default function UserSelect(props: Props) {
                 selection
                 multiple={props.multiple}   
             />
-
-            
 
   
             {meta.touched && meta.error ? (

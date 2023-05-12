@@ -28,6 +28,14 @@ import UserManagerDetails from '../../features/UserManager/UserManagerDetails';
 import UserManagerNew from "../../features/UserManager/UserManagerNew";
 import RoleMasterList from '../../features/RoleMaster/RoleMasterList';
 import RoleMasterDetails from '../../features/RoleMaster/RoleMasterDetails';
+import ActionTrackerList from "../../features/ActionTracker/ActionTrackerList";
+import ActionTrackerDetails from "../../features/ActionTracker/ActionTrackerDetails";
+import ActionTrackerAuditLogList from '../../features/ActionTrackerAuditLog/ActionTrackerAuditLogList';
+import ActionTrackerAuditLogDetails from '../../features/ActionTrackerAuditLog/ActionTrackerAuditLogDetails';
+import ActionTackerTypesListList from '../../features/ActionTackerTypesList/ActionTackerTypesListList';
+import ActionTackerTypesListDetails from '../../features/ActionTackerTypesList/ActionTackerTypesListDetails';
+import ActionTackerTaskListList from '../../features/ActionTackerTaskList/ActionTackerTaskListList';
+import ActionTackerTaskListDetails from '../../features/ActionTackerTaskList/ActionTackerTaskListDetails';
 //##RouteImport##
 
 export const routes: RouteObject[] = [
@@ -84,6 +92,22 @@ export const routes: RouteObject[] = [
 			{path: 'RoleMasterDetails/:id', element: <RoleMasterDetails />},
 			{path: 'CreateRoleMaster', element: <RoleMasterDetails  key='create'/>},
 
+            {path: 'ActionTrackerList', element: <ActionTrackerList />},
+			{path: 'ActionTrackerDetails/:id', element: <ActionTrackerDetails />},
+			{path: 'CreateActionTracker', element: <ActionTrackerDetails  key='create'/>},
+
+			{path: 'ActionTrackerAuditLogList', element: <ActionTrackerAuditLogList />},
+			{path: 'ActionTrackerAuditLogDetails/:id', element: <ActionTrackerAuditLogDetails />},
+			{path: 'CreateActionTrackerAuditLog', element: <ActionTrackerAuditLogDetails  key='create'/>},
+
+			{path: 'Projects', element: <ActionTackerTypesListList />},
+			{path: 'Projects/:id', element: <ActionTackerTypesListDetails />},
+			{path: 'NewProject', element: <ActionTackerTypesListDetails  key='create'/>},
+
+			{path: 'Tasks', element: <ActionTackerTaskListList />},
+			{path: 'Tasks/:id', element: <ActionTackerTaskListDetails />},
+			{path: 'NewTask', element: <ActionTackerTaskListDetails  key='create'/>},
+
 			//##Route##
            
 
@@ -92,6 +116,9 @@ export const routes: RouteObject[] = [
 ]
 
 export const router = createBrowserRouter(routes);
+
+
+
 
 
 

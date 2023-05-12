@@ -117,7 +117,7 @@ export default observer(function DataSecurityDetails() {
                                     }
                                 })
                             }                         
-                            name='tableId' placeholder='Table Name' />
+                            name='tableId' placeholder='Table Name' /> 
 
                         <MyDropdownInput  label="Access Type" options={DataSecurityAccessType}                             
                             name='accessType' placeholder='Access Type' />

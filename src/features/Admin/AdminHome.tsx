@@ -91,6 +91,55 @@ export default observer(function AdminHome() {
                 </Card.Content>
             </Card>
 
+            <Card>
+                <Card.Content>                    
+                    <Card.Header>Action Tracker</Card.Header>                                      
+                </Card.Content>
+                <Card.Content extra>
+                    <div className='ui two buttons'>                    
+                    <Button as={NavLink} to='/ActionTrackerList' basic color='green' content='List' />
+                    <Button as={NavLink} to='/CreateActionTracker' basic color='green' content='Add New' />                                                       
+                    </div>
+                </Card.Content>
+            </Card>
+
+            <Card>
+                <Card.Content>                    
+                    <Card.Header>Action Tracker AuditLog</Card.Header>                                      
+                </Card.Content>
+                <Card.Content extra>
+                    <div className='ui two buttons'>                    
+                    <Button as={NavLink} to='/ActionTrackerAuditLogList' basic color='green' content='List' />
+                    <Button as={NavLink} to='/CreateActionTrackerAuditLog' basic color='green' content='Add New' />                                                       
+                    </div>
+                </Card.Content>
+            </Card>
+
+            <Card>
+                <Card.Content>                    
+                    <Card.Header>Projects</Card.Header>                                      
+                </Card.Content>
+                <Card.Content extra>
+                    <div className='ui two buttons'>                    
+                    <Button as={NavLink} to='/Projects' basic color='green' content='List' />
+                    <Button as={NavLink} to='/NewProject' basic color='green' content='Add New' />                                                       
+                    </div>
+                </Card.Content>
+            </Card>
+
+            <Card>
+                <Card.Content>                    
+                    <Card.Header>Tasks</Card.Header>                                      
+                </Card.Content>
+                <Card.Content extra>
+                    <div className='ui two buttons'>                    
+                    <Button as={NavLink} to='/Tasks' basic color='green' content='List' />
+                    <Button as={NavLink} to='/NewTask' basic color='green' content='Add New' />                                                       
+                    </div>
+                </Card.Content>
+            </Card>
+
+
         </Card.Group>
     )
 })

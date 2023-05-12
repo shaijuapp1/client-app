@@ -13,13 +13,13 @@ export default observer(function HomePage() {
             <Container text>
                 <Header as='h1' inverted>
                     <Image size='massive' src='/assets/logo.png' alt='logo' style={{ marginBottom: 12 }} />
-                    Reactivities
+                    Virto
                 </Header>
                 {userStore.isLoggedIn ? (
                     <>
                         <Header as='h2' inverted content={`Welcome back ${userStore.user?.displayName}`} />
-                        <Button as={Link} to='/activities' size='huge' inverted>
-                            Go to activities!
+                        <Button as={Link} to='/Projects' size='huge' inverted>
+                            Go to projects!
                         </Button>
                     </>
                 ) : (

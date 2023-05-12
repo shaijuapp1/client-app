@@ -18,6 +18,19 @@ export default class AppConfigStore {
     constructor() {
         makeAutoObservable(this)
     }
+
+    // loadAppConfig = async (id: string) => {
+    //     this.setLoadingInitial(true);
+    //     try {            
+    //         this.appConfigs =  await agent.AppConfigs.loadConfigItems(id);
+    //         //debugger;
+    //         this.setLoadingInitial(false);
+    //         return this.item;
+    //     } catch (error) {
+    //         console.log(error);
+    //         this.setLoadingInitial(false);
+    //     }
+    // }
     
     loadItems = async () => {
         this.setLoadingInitial(true);

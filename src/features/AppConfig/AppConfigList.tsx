@@ -30,10 +30,9 @@ export default observer(function AppConfigList() {
         {
           title: "Config Type",
           field: "configTypeId",
-          render : (values: AppConfig) => { return <span >{GetStatus(values.configTypeId)}</span> },
+          //render : (values: AppConfig) => { return <span >{GetStatus(values.configTypeId)}</span> },
           //lookup : AppConfigTypeStore.itemList
-          
-          
+          render : (values: AppConfig) => { return <span >{GetStatus(values.configTypeId)}</span> },
         }
     ];
 //render : (values: AppConfig) => { return GetStatus(values.configTypeId) },
