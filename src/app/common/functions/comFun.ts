@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import { number } from "yup";
 import { AppConfig } from "../../models/AppConfig";
+import { RoleMaster } from "../../models/RoleMaster";
 import { UserManager } from "../../models/UserManager";
 
 export default class comFun {
@@ -49,6 +50,42 @@ export default class comFun {
                     break;
                 }
             }
+        }      
+        return res;
+    }
+
+    //User Functions comFun.GetUserNameFromList
+    public static GetUserNameFromList = (selUser?:string[], userList?:UserManager[], roleList?:RoleMaster[]) => {
+        var res = "";
+        if(selUser && userList && userList?.length>0){
+            
+            selUser.forEach(uId => {
+                var uid = uId.replace("U:", "")
+                uid = uid.replace("G:", "")
+
+                for(var i=0;i<userList.length;i++){
+                    if(userList[i].id == uid){
+                        if(res){
+                            res += ", "
+                        }
+                        res += userList[i].displayName
+                        break;
+                    }
+                }
+
+                if(roleList){
+                    for(var i=0;i<roleList.length;i++){
+                        if(roleList[i].id == uid){
+                            if(res){
+                                res += ", "
+                            }
+                            res += roleList[i].name
+                            break;
+                        }
+                    }
+                }
+                
+            })            
         }      
         return res;
     }

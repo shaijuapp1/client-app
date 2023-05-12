@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from 'react-router-dom';
 import { Button, ButtonGroup, LinearProgress, List, ListItem } from '@material-ui/core';
 import MaterialTable from 'material-table';
@@ -8,11 +8,17 @@ import LoadingComponent from "../../app/layout/LoadingComponent";
 import { useStore } from "../../app/stores/store";
 import { ActionTackerTaskList } from "../../app/models/ActionTackerTaskList";
 import comFun from "../../app/common/functions/comFun";
+import { UserManager } from "../../app/models/UserManager";
+import { RoleMaster } from "../../app/models/RoleMaster";
 
 export default observer(function ActionTackerTaskListList() {
-    const { ActionTackerTaskListStore } = useStore();
+    const { ActionTackerTaskListStore , UserManagerStore, RoleMasterStore  } = useStore();
     const { loadItems,  itemList, taskStatusList } = ActionTackerTaskListStore;
-
+    const { refreshAllUsers } = UserManagerStore;
+    const { refreshAllRoles } = RoleMasterStore;
+    const [usrLst, setUserList] = useState<UserManager[]>() 
+    const [grpLst, setGrpList] = useState<RoleMaster[]>()
+    
     const TableColumns = [
         {
           title: "id",
@@ -37,12 +43,16 @@ export default observer(function ActionTackerTaskListList() {
         {
           title: "Responsibility",
           field: "title",
-          render : (values: ActionTackerTaskList) => { return <NavLink to={`/Tasks/${values.id}` } >{values.title}</NavLink> },
+          render : (values: ActionTackerTaskList) => { 
+            return comFun.GetUserNameFromList(values.responsibilityList, usrLst, grpLst) 
+          },
         },
         {
           title: "Stakeholder",
           field: "title",
-          render : (values: ActionTackerTaskList) => { return <NavLink to={`/Tasks/${values.id}` } >{values.title}</NavLink> },
+          render : (values: ActionTackerTaskList) => {  
+            return comFun.GetUserNameFromList(values.stakeholderList, usrLst, grpLst) 
+          },
         },
         {
           title: "Last Update",
@@ -85,6 +95,15 @@ export default observer(function ActionTackerTaskListList() {
 
 
     useEffect(() => {
+
+      refreshAllUsers().then((usrLst)=>{
+          setUserList(usrLst);           
+      })
+
+      refreshAllRoles().then((grpLst)=>{
+        setGrpList(grpLst);           
+      })
+
         loadItems(); 
     }, [loadItems])
 

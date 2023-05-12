@@ -62,7 +62,7 @@ export default observer(function ActionTackerTaskListDetails() {
                     it.actualComplectionDate = new Date(it.actualComplectionDate);
                 setActionTackerTaskList(it!)
             });
-        } 
+        }
         else{
             loadTaskStatusList()
         }
@@ -115,7 +115,7 @@ export default observer(function ActionTackerTaskListDetails() {
             }
             
         }
-       return res;
+        return res;
 
     }
 
